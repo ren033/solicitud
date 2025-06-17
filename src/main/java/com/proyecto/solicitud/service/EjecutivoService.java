@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.proyecto.solicitud.model.Cliente;
 import com.proyecto.solicitud.model.Ejecutivo;
 import com.proyecto.solicitud.repository.EjecutivoRepository;
 
