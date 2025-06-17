@@ -11,6 +11,7 @@ import com.proyecto.solicitud.model.Solicitud;
 public interface SolicitudRepository extends JpaRepository<Solicitud, Integer>
 {
     List<Solicitud> findAll();
+
     @SuppressWarnings({ "unchecked", "null" })
     Solicitud save (Solicitud solicitud);
 }

@@ -11,6 +11,7 @@ import com.proyecto.solicitud.model.Ejecutivo;
 public interface EjecutivoRepository extends JpaRepository<Ejecutivo, Integer>
 {
     List<Ejecutivo> findAll();
+    
     @SuppressWarnings({ "unchecked", "null" })
     Ejecutivo save (Ejecutivo ejecutivo);
 
