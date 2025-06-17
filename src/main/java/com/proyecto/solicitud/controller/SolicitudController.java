@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.proyecto.solicitud.model.Ejecutivo;
 import com.proyecto.solicitud.model.Solicitud;
 import com.proyecto.solicitud.service.SolicitudService;
 
@@ -32,5 +31,17 @@ public class SolicitudController
     @GetMapping("/id")
     public ResponseEntity<Solicitud> getById(@PathVariable int id){
         return new ResponseEntity<Solicitud>(solicitudService.findById(id), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity <Solicitud> postSolicitud(@RequestBody Solicitud solicitud)
+    {
+        Solicitud search = solicitudService.findById(solicitud.getId());
+        if (search == null) {
+            return new ResponseEntity<>(solicitudService.save(solicitud), HttpStatus.CREATED);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 }
