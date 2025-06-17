@@ -13,7 +13,4 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer>
     List<Solicitud> findAll();
     @SuppressWarnings({ "unchecked", "null" })
     Solicitud save (Solicitud solicitud);
-
-    Cliente getReferenceById(int id);
-    Cliente getByName(String nombre);
 }
