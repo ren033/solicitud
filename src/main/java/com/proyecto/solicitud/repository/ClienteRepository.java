@@ -10,8 +10,8 @@ import com.proyecto.solicitud.model.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>
 {
-    List<Cliente> findAll();
-    
+    List<Cliente> FindAll();
+
     @SuppressWarnings({ "unchecked", "null" })
     Cliente save (Cliente cliente);
 
