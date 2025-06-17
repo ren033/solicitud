@@ -26,6 +26,10 @@ public class ClienteService
         return clienteRepository.getReferenceById(id);
     }
 
+    public Cliente findByName(String nombre){
+        return clienteRepository.getByName(nombre);
+    }
+
     public Cliente deleteById(int id){
         return clienteRepository.getReferenceById(id);
     }
