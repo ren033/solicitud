@@ -20,4 +20,8 @@ public class Solicitud {
 
     @Column(name = "Descripcion", nullable = false)
     private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Cliente cliente;
 }

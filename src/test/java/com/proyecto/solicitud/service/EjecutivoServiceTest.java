@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,22 +31,21 @@ class EjecutivoServiceTest
     }
 
     @Test
-    void testSaveEjecutivo() {
-        Ejecutivo ejecutivo = new Ejecutivo();
-        Ejecutivo ejecutivoSaved = new Ejecutivo();
-        
-        when(ejecutivoRepository.save(ejecutivo)).thenReturn(ejecutivoSaved);
+    public void testSaveEjecutivo() {
+        Ejecutivo ejecutivo = new Ejecutivo(1, "543", "Juan", "juan43@gmail.com", "Dpto 08", true);
 
-        Ejecutivo resultado = ejecutivoService.save(ejecutivo);
-        assertThat(resultado.getId()).isEqualTo(1);
-        assertThat(resultado.getNombre()).isEqualTo("");
-        verify(ejecutivoRepository).save(ejecutivo);
+        when(ejecutivoRepository.save(ejecutivo)).thenReturn(ejecutivo);
+        Ejecutivo saved = ejecutivoService.save(ejecutivo);
+
+        assertNotNull(saved);
+        assertEquals(1, saved.getId());
+        assertEquals("Juan", saved.getNombre());
     }
 
     @Test
-    void testListClientes() {
-        Ejecutivo e1 = new Ejecutivo();
-        Ejecutivo e2 = new Ejecutivo();
+    void testListEjecutivo() {
+        Ejecutivo e1 = new Ejecutivo(1, "543", "Juan", "juan43@gmail.com", "Dpto 08", true);
+        Ejecutivo e2 = new Ejecutivo(2, "098", "Jose", "jj@gmail.com", "Calle 9", true);
 
         when(ejecutivoRepository.findAll()).thenReturn(Arrays.asList(e1, e2));
 
