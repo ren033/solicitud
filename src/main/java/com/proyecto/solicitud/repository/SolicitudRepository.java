@@ -1,5 +1,7 @@
 package com.proyecto.solicitud.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +16,6 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer>
     //Solicitud save (Solicitud solicitud);
 
     Solicitud getReferenceById(int id);
+
+    List<Solicitud> findByClienteId(int idCliente);
 }

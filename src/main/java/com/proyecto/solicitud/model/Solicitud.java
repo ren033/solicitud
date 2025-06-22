@@ -21,6 +21,9 @@ public class Solicitud {
     @Column(name = "Descripcion", nullable = false)
     private String descripcion;
 
+    @Column(name = "Estado", nullable = false)
+    private boolean estado;
+
     @ManyToOne
     @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;

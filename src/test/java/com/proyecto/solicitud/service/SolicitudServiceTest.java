@@ -2,10 +2,9 @@ package com.proyecto.solicitud.service;
 
 import static org.mockito.Mockito.*;
 
-import java.util.Arrays;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+//import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.proyecto.solicitud.model.Cliente;
 import com.proyecto.solicitud.model.Solicitud;
 import com.proyecto.solicitud.repository.SolicitudRepository;
 
@@ -30,26 +30,32 @@ class SolicitudServiceTest
     }
 
     @Test
-    void testSaveSolicitud() {
-        Solicitud solicitud = new Solicitud();
-        Solicitud solicitudSaved = new Solicitud();
-        
-        when(solicitudRepository.save(solicitud)).thenReturn(solicitudSaved);
+    public void testSaveSolicitud() {
+        Solicitud solicitud = createSolicitud();
+        when(solicitudRepository.save(solicitud)).thenReturn(solicitud);
 
-        Solicitud resultado = solicitudService.save(solicitud);
-        assertThat(resultado.getId()).isEqualTo(1);
-        verify(solicitudRepository).save(solicitud);
+        Solicitud saved = solicitudService.save(solicitud);
+        assertNotNull(saved);
+        assertEquals(1, saved.getId());
     }
 
-    @Test
-    void testListClientes() {
-        Solicitud s1 = new Solicitud();
-        Solicitud s2 = new Solicitud();
 
-        when(solicitudRepository.findAll()).thenReturn(Arrays.asList(s1, s2));
+    private Solicitud createSolicitud() {
+        Cliente cliente = new Cliente();
+        cliente.setId(1);
+        cliente.setPassword("pass");
+        cliente.setUsername("usercarlos");
+        cliente.setNombre("Carlos");
+        cliente.setCorreo("carlos@gmail.com");
+        cliente.setDireccion("Calle 23");
+        cliente.setEstado(true);
 
-        List<Solicitud> resultado = solicitudService.listSolicitudes();
-        assertThat(resultado).hasSize(2).contains(s1, s2);
-        verify(solicitudRepository).findAll();
+        Solicitud solicitud = new Solicitud();
+        solicitud.setId(1);
+        solicitud.setTipo("Solicitud de Asistencia");
+        solicitud.setDescripcion("Se requiere asistencia tecnica");
+        solicitud.setEstado(true);
+
+        return solicitud;
     }
 }

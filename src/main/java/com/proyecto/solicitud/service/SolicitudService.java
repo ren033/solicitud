@@ -26,6 +26,10 @@ public class SolicitudService
         return solicitudRepository.getReferenceById(id);
     }
 
+    public List<Solicitud> findByClienteId(int idCliente) {
+        return solicitudRepository.findByClienteId(idCliente);
+    }
+
     public Solicitud deleteById(int id){
         return solicitudRepository.getReferenceById(id);
     }
