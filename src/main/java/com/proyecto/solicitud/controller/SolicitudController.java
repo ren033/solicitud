@@ -44,4 +44,20 @@ public class SolicitudController
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
     }
+
+    @PutMapping("/id")
+    public ResponseEntity<Solicitud> updateSolicitud(@RequestBody Solicitud solicitud, @PathVariable int id)
+    {
+        List<Solicitud> updateSolicitud = solicitudService.listSolicitudes();
+        if (!updateSolicitud.isEmpty())
+            return ResponseEntity.notFound().build();
+            solicitud.setId(id);
+            solicitudService.save(solicitud);
+            return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/id")
+    public void deleteSolicitud(@PathVariable int id){
+        solicitudService.deleteById(id);
+    }
 }
