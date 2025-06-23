@@ -1,9 +1,11 @@
 package com.proyecto.solicitud.service;
 
+//import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
+//import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,4 +57,59 @@ class ClienteServiceTest
         assertThat(resultado).hasSize(3).contains(c1, c2, c3);
         verify(clienteRepository).findAll();
     }
+/*
+    @Test
+void testFindById() {
+    int id = 1;
+
+    Cliente c1 = new Cliente();
+    c1.setId(id);
+    c1.setPassword("pass");
+    c1.setUsername("usercarlos");
+    c1.setNombre("Carlos");
+    c1.setCorreo("carlos@gmail.com");
+    c1.setDireccion("Calle 23");
+    c1.setEstado(true);
+
+    when(clienteRepository.findById(id)).thenReturn(Optional.of(c1));
+
+    Cliente resultado = clienteService.findById(id);
+
+    assertNotNull(resultado);
+    assertEquals(id, resultado.getId());
+    assertEquals("pass", resultado.getPassword());
+    assertEquals("usercarlos", resultado.getUsername());
+    assertEquals("Carlos", resultado.getNombre());
+    assertEquals("carlos@gmail.com", resultado.getCorreo());
+
+    verify(clienteRepository).findById(id);
+}
+
+    @Test
+    void testUpdateById() {
+        int id = 1;
+
+        Cliente existingCliente = new Cliente();
+        existingCliente.setId(id);
+        existingCliente.setNombre("Juan");
+
+        Cliente updatedData = new Cliente();
+        updatedData.setNombre("Carlos");
+
+        Cliente updatedCliente = new Cliente();
+        updatedCliente.setId(id);
+        updatedCliente.setNombre("Carlos");
+
+        when(clienteRepository.findById(id)).thenReturn(Optional.of(existingCliente));
+        when(clienteRepository.save(any(Cliente.class))).thenReturn(updatedCliente);
+
+        Cliente resultado = clienteService.updateById(id);
+
+        assertNotNull(resultado);
+        assertThat(resultado.getNombre()).isEqualTo("Carlos");
+
+        verify(clienteRepository).findById(id);
+        verify(clienteRepository).save(any(Cliente.class));
+    }
+*/
 }

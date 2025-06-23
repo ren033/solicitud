@@ -22,6 +22,10 @@ public class EjecutivoService
         return ejecutivoRepository.save(ejecutivo);
     }
 
+    public Ejecutivo updateById(int id){
+        return ejecutivoRepository.getReferenceById(id);
+    }
+
     public Ejecutivo findById(int id){
         return ejecutivoRepository.getReferenceById(id);
     }
