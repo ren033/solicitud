@@ -31,8 +31,12 @@ public class SolicitudService
         return solicitudRepository.findByClienteId(idCliente);
     }
 
-    public Solicitud deleteById(int id){
-        return solicitudRepository.getReferenceById(id);
+    public Optional<Solicitud> deleteById(int id) {
+        Optional<Solicitud> solicitud = solicitudRepository.findById(id);
+        if (solicitud.isPresent()) {
+            solicitudRepository.deleteById(id);
+        }
+    return solicitud;
     }
 }
 

@@ -2,6 +2,9 @@ package com.proyecto.solicitud.service;
 
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +28,23 @@ class SolicitudServiceTest
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void testListSolicitudes() {
+        Cliente c1 = new Cliente(1, "pass", "usercarlos", "Carlos", "carlos@email.com", "Calle 23", true);
+        Cliente c2 = new Cliente(2, "passw0rd", "anonimo", "Antonio", "anon@email.com", "Edificio A2", true);
+        Solicitud sol1 = new Solicitud(1, "Tipo Solicitud", "Descripcion Solicitud", true, c2);
+        Solicitud sol2 = new Solicitud(2, "Tipo Solicitud", "Descripcion Solicitud", false, c2);
+        Solicitud sol3 = new Solicitud(2, "Tipo Solicitud", "Descripcion Solicitud", true, c1);
+        List<Solicitud> solicitudes = Arrays.asList(sol1, sol2, sol3);
+        when(solicitudRepository.findAll()).thenReturn(solicitudes);
+
+        List<Solicitud> response = solicitudService.listSolicitudes();
+
+        assertNotNull(response);
+        assertEquals(3, response.size());
+        assertEquals(solicitudes, response);
     }
 
     @Test
@@ -55,5 +75,21 @@ class SolicitudServiceTest
         solicitud.setEstado(true);
 
         return solicitud;
+    }
+
+    @Test
+    public void testFindByClienteId() {
+        int idCliente = 2;
+        Cliente c2 = new Cliente();  // Mock Cliente
+        Solicitud sol1 = new Solicitud(1, "Tipo Solicitud", "Descripcion Solicitud", true, c2);
+        Solicitud sol2 = new Solicitud(2, "Tipo Solicitud", "Descripcion Solicitud", false, c2);
+        List<Solicitud> solicitudes = Arrays.asList(sol1, sol2);
+        when(solicitudRepository.findByClienteId(idCliente)).thenReturn(solicitudes);
+
+        List<Solicitud> response = solicitudService.findByClienteId(idCliente);
+
+        assertNotNull(response);
+        assertEquals(2, response.size());
+        assertEquals(solicitudes, response);
     }
 }
