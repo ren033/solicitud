@@ -1,6 +1,7 @@
 package com.proyecto.solicitud.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,19 +23,19 @@ public class EjecutivoService
         return ejecutivoRepository.save(ejecutivo);
     }
 
-    public Ejecutivo updateById(int id){
+    public Optional<Ejecutivo> updateById(int id){
         return ejecutivoRepository.getReferenceById(id);
     }
 
-    public Ejecutivo findById(int id){
+    public Optional<Ejecutivo> findById(int id){
         return ejecutivoRepository.getReferenceById(id);
     }
 
-    public Ejecutivo findByName(String nombre){
-        return ejecutivoRepository.getByName(nombre);
+    public Optional<Ejecutivo> findByName(String nombre){
+        return ejecutivoRepository.getReferenceByName(nombre);
     }
 
-    public Ejecutivo deleteById(int id){
+    public Optional<Ejecutivo> deleteById(int id){
         return ejecutivoRepository.getReferenceById(id);
     }
 }

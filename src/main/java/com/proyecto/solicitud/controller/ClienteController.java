@@ -1,6 +1,7 @@
 package com.proyecto.solicitud.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,18 +31,18 @@ public class ClienteController
 
     @GetMapping("/id")
     public ResponseEntity<Cliente> getById(@PathVariable int id){
-        return new ResponseEntity<Cliente>(clienteService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<Cliente>(HttpStatus.OK);
     }
 
     @GetMapping("/cliente")
     public ResponseEntity<Cliente> getByName(@PathVariable String nombre){
-        return new ResponseEntity<Cliente>(clienteService.findByName(nombre), HttpStatus.OK);
+        return new ResponseEntity<Cliente>(HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity <Cliente> postCliente(@RequestBody Cliente cliente)
     {
-        Cliente search = clienteService.findById(cliente.getId());
+        Optional<Cliente> search = clienteService.findById(cliente.getId());
         if (search == null) {
             return new ResponseEntity<>(clienteService.save(cliente), HttpStatus.CREATED);
         }

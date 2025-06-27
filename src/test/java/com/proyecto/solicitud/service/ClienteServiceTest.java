@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
 
 import com.proyecto.solicitud.model.Cliente;
 import com.proyecto.solicitud.repository.ClienteRepository;
@@ -57,33 +59,25 @@ class ClienteServiceTest
         assertThat(resultado).hasSize(3).contains(c1, c2, c3);
         verify(clienteRepository).findAll();
     }
-/*
+
+    /*
     @Test
-void testFindById() {
-    int id = 1;
+    public void testFindById() {
+        // Arrange
+        int id = 1;
+        ResponseEntity<Cliente> c1;
 
-    Cliente c1 = new Cliente();
-    c1.setId(id);
-    c1.setPassword("pass");
-    c1.setUsername("usercarlos");
-    c1.setNombre("Carlos");
-    c1.setCorreo("carlos@gmail.com");
-    c1.setDireccion("Calle 23");
-    c1.setEstado(true);
+        when(clienteService.findById(id)).thenReturn(c1);
 
-    when(clienteRepository.findById(id)).thenReturn(Optional.of(c1));
+        ResponseEntity<Cliente> response = clienteService.findById(id);
 
-    Cliente resultado = clienteService.findById(id);
-
-    assertNotNull(resultado);
-    assertEquals(id, resultado.getId());
-    assertEquals("pass", resultado.getPassword());
-    assertEquals("usercarlos", resultado.getUsername());
-    assertEquals("Carlos", resultado.getNombre());
-    assertEquals("carlos@gmail.com", resultado.getCorreo());
-
-    verify(clienteRepository).findById(id);
-}
+        // Assert
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo(c1);
+        verify(clienteService, times(1)).findById(id);
+    }
+*/
+/*
 
     @Test
     void testUpdateById() {

@@ -1,5 +1,7 @@
 package com.proyecto.solicitud.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +15,6 @@ public interface EjecutivoRepository extends JpaRepository<Ejecutivo, Integer>
     //@SuppressWarnings({ "unchecked", "null" })
     //Ejecutivo save (Ejecutivo ejecutivo);
 
-    Ejecutivo getReferenceById(int id);
-    Ejecutivo getByName(String nombre);
+    Optional<Ejecutivo> getReferenceById(int id);
+    Optional<Ejecutivo> getReferenceByName(String nombre);
 }

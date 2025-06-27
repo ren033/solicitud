@@ -1,6 +1,7 @@
 package com.proyecto.solicitud.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,19 +23,19 @@ public class ClienteService
         return clienteRepository.save(cliente);
     }
 
-    public Cliente updateById(int id){
+    public Optional<Cliente> updateById(int id){
         return clienteRepository.getReferenceById(id);
     }
 
-    public Cliente findById(int id){
+    public Optional<Cliente> findById(int id) {
         return clienteRepository.getReferenceById(id);
     }
 
-    public Cliente findByName(String nombre){
-        return clienteRepository.getByName(nombre);
+    public Optional<Cliente> findByName(String nombre){
+        return clienteRepository.getReferenceByName(nombre);
     }
 
-    public Cliente deleteById(int id){
+    public Optional<Cliente> deleteById(int id){
         return clienteRepository.getReferenceById(id);
     }
 }

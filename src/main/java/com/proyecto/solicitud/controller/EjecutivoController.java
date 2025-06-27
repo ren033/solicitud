@@ -1,6 +1,7 @@
 package com.proyecto.solicitud.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,18 +31,18 @@ public class EjecutivoController
 
     @GetMapping("/id")
     public ResponseEntity<Ejecutivo> getById(@PathVariable int id){
-        return new ResponseEntity<Ejecutivo>(ejecutivoService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<Ejecutivo>(HttpStatus.OK);
     }
 
     @GetMapping("/ejecutivo")
     public ResponseEntity<Ejecutivo> getByName(@PathVariable String nombre){
-        return new ResponseEntity<Ejecutivo>(ejecutivoService.findByName(nombre), HttpStatus.OK);
+        return new ResponseEntity<Ejecutivo>(HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity <Ejecutivo> postEjecutivo(@RequestBody Ejecutivo ejecutivo)
     {
-        Ejecutivo search = ejecutivoService.findById(ejecutivo.getId());
+        Optional<Ejecutivo> search = ejecutivoService.findById(ejecutivo.getId());
         if (search == null) {
             return new ResponseEntity<>(ejecutivoService.save(ejecutivo), HttpStatus.CREATED);
         }

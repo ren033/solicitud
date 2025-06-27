@@ -1,6 +1,7 @@
 package com.proyecto.solicitud.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer>
     //@SuppressWarnings({"unchecked", "null"})
     //Cliente save (Cliente cliente);
 
-    Cliente getReferenceById(int id);
-    Cliente getByName(String nombre);
+    Optional<Cliente> getReferenceById(int id);
+    Optional<Cliente> getReferenceByName(String nombre);
 }
