@@ -1,6 +1,7 @@
 package com.proyecto.solicitud.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class SolicitudService
         return solicitudRepository.save(solicitud);
     }
 
-    public Solicitud findById(int id){
-        return solicitudRepository.getReferenceById(id);
+    public Optional<Solicitud> findById(int id){
+        return solicitudRepository.findById(id);
     }
 
     public List<Solicitud> findByClienteId(int idCliente) {

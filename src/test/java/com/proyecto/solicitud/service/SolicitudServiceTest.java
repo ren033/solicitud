@@ -2,8 +2,6 @@ package com.proyecto.solicitud.service;
 
 import static org.mockito.Mockito.*;
 
-
-//import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -52,8 +50,8 @@ class SolicitudServiceTest
 
         Solicitud solicitud = new Solicitud();
         solicitud.setId(1);
-        solicitud.setTipo("Solicitud de Asistencia");
-        solicitud.setDescripcion("Se requiere asistencia tecnica");
+        solicitud.setTipo("Tipo Solicitud");
+        solicitud.setDescripcion("Descripcion Solicitud");
         solicitud.setEstado(true);
 
         return solicitud;

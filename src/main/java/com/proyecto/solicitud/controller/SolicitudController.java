@@ -1,6 +1,7 @@
 package com.proyecto.solicitud.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,13 +31,13 @@ public class SolicitudController
 
     @GetMapping("/id")
     public ResponseEntity<Solicitud> getById(@PathVariable int id){
-        return new ResponseEntity<Solicitud>(solicitudService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<Solicitud>(HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity <Solicitud> postSolicitud(@RequestBody Solicitud solicitud)
     {
-        Solicitud search = solicitudService.findById(solicitud.getId());
+        Optional<Solicitud> search = solicitudService.findById(solicitud.getId());
         if (search == null) {
             return new ResponseEntity<>(solicitudService.save(solicitud), HttpStatus.CREATED);
         }
