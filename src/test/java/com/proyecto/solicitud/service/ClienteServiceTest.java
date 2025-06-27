@@ -102,6 +102,18 @@ class ClienteServiceTest
     }
 
     @Test
+    public void testFindByName() {
+        String nombre = "Antonio";
+        Cliente c2 = new Cliente(2, "passw0rd", "anonimo", nombre, "anon@email.com", "Edificio A2", true);
+        when(clienteRepository.getReferenceByName(nombre)).thenReturn(Optional.of(c2));
+
+        Optional<Cliente> response = clienteService.findByName(nombre);
+
+        assertTrue(response.isPresent());
+        assertEquals(c2, response.get());
+    }
+
+    @Test
     public void testDeleteById() {
         int id = 3;
         Cliente c3 = new Cliente(id, "321", "marii", "Mari", "marimail@email.com", "Dpto 10", false);

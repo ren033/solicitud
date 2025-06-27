@@ -98,6 +98,18 @@ class EjecutivoServiceTest
     }
 
     @Test
+    public void testFindByName() {
+        String nombre = "Jose";
+        Ejecutivo e2= new Ejecutivo(2, "098", nombre, "jj@email.com", "Calle 9", true);
+        when(ejecutivoRepository.getReferenceByName(nombre)).thenReturn(Optional.of(e2));
+
+        Optional<Ejecutivo> response = ejecutivoService.findByName(nombre);
+
+        assertTrue(response.isPresent());
+        assertEquals(e2, response.get());
+    }
+
+    @Test
     public void testDeleteById() {
         int id = 2;
         Ejecutivo e2 = new Ejecutivo(id,"098", "Jose", "jj@email.com", "Calle 9", true);
