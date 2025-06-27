@@ -35,8 +35,12 @@ public class ClienteService
         return clienteRepository.getReferenceByName(nombre);
     }
 
-    public Optional<Cliente> deleteById(int id){
-        return clienteRepository.findById(id);
+    public Optional<Cliente> deleteById(int id) {
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        if (cliente.isPresent()) {
+            clienteRepository.deleteById(id);
+        }
+    return cliente;
     }
 }
 

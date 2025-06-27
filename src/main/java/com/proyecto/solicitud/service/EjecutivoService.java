@@ -35,8 +35,12 @@ public class EjecutivoService
         return ejecutivoRepository.getReferenceByName(nombre);
     }
 
-    public Optional<Ejecutivo> deleteById(int id){
-        return ejecutivoRepository.findById(id);
+    public Optional<Ejecutivo> deleteById(int id) {
+        Optional<Ejecutivo> ejecutivo = ejecutivoRepository.findById(id);
+        if (ejecutivo.isPresent()) {
+            ejecutivoRepository.deleteById(id);
+        }
+    return ejecutivo;
     }
 }
 

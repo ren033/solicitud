@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
-//import java.util.Optional;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,8 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
 
 import com.proyecto.solicitud.model.Cliente;
 import com.proyecto.solicitud.repository.ClienteRepository;
@@ -84,12 +81,36 @@ class ClienteServiceTest
 
     @Test
     public void testUpdate_NotExists() {
-        int id = 1;
+        int id = 4;
         when(clienteRepository.findById(id)).thenReturn(Optional.empty());
 
         Optional<Cliente> response = clienteService.updateById(id);
 
         assertThat(response).isEmpty();
         verify(clienteRepository, times(1)).findById(id);
+    }
+
+    @Test
+    public void testFindById() {
+        int id = 2;
+        Cliente c2 = new Cliente(id, "passw0rd", "anonimo", "Antonio", "anon@email.com", "Edificio A2", true);
+        when(clienteRepository.findById(id)).thenReturn(Optional.of(c2));
+
+        Optional<Cliente> response = clienteService.findById(id);
+        assertTrue(response.isPresent());
+        assertEquals(c2, response.get());
+    }
+
+    @Test
+    public void testDeleteById() {
+        int id = 3;
+        Cliente c3 = new Cliente(id, "321", "marii", "Mari", "marimail@email.com", "Dpto 10", false);
+        when(clienteRepository.findById(id)).thenReturn(Optional.of(c3));
+
+        Optional<Cliente> response = clienteService.deleteById(id);
+
+        verify(clienteRepository).deleteById(id);
+        assertTrue(response.isPresent());
+        assertEquals(c3, response.get());
     }
 }

@@ -85,4 +85,28 @@ class EjecutivoServiceTest
         assertThat(response).isEmpty();
         verify(ejecutivoRepository, times(1)).findById(id);
     }
+
+    @Test
+    public void testFindById() {
+        int id = 2;
+        Ejecutivo e2 = new Ejecutivo(id, "098", "Jose", "jj@email.com", "Calle 9", true);
+        when(ejecutivoRepository.findById(id)).thenReturn(Optional.of(e2));
+
+        Optional<Ejecutivo> response = ejecutivoService.findById(id);
+        assertTrue(response.isPresent());
+        assertEquals(e2, response.get());
+    }
+
+    @Test
+    public void testDeleteById() {
+        int id = 2;
+        Ejecutivo e2 = new Ejecutivo(id,"098", "Jose", "jj@email.com", "Calle 9", true);
+        when(ejecutivoRepository.findById(id)).thenReturn(Optional.of(e2));
+
+        Optional<Ejecutivo> response = ejecutivoService.deleteById(id);
+
+        verify(ejecutivoRepository).deleteById(id);
+        assertTrue(response.isPresent());
+        assertEquals(e2, response.get());
+    }
 }
