@@ -4,6 +4,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,13 +45,44 @@ class EjecutivoServiceTest
 
     @Test
     void testListEjecutivo() {
-        Ejecutivo e1 = new Ejecutivo(1, "543", "Juan", "juan43@gmail.com", "Dpto 08", true);
-        Ejecutivo e2 = new Ejecutivo(2, "098", "Jose", "jj@gmail.com", "Calle 9", true);
+        Ejecutivo e1 = new Ejecutivo(1, "543", "Juan", "juan43@email.com", "Dpto 08", true);
+        Ejecutivo e2 = new Ejecutivo(2, "098", "Jose", "jj@email.com", "Calle 9", true);
 
         when(ejecutivoRepository.findAll()).thenReturn(Arrays.asList(e1, e2));
 
         List<Ejecutivo> resultado = ejecutivoService.listEjecutivos();
         assertThat(resultado).hasSize(2).contains(e1, e2);
         verify(ejecutivoRepository).findAll();
+    }
+
+    @Test
+    public void testUpdate_Exists() {
+        int id = 1;
+        Ejecutivo e1 = new Ejecutivo();
+        e1.setId(id);
+        e1.setPassword("543");
+        e1.setNombre("Juan");
+        e1.setCorreo("juan43@email.com");
+        e1.setDireccion("Dpto 08");
+        e1.setEstado(true);
+
+        when(ejecutivoRepository.findById(id)).thenReturn(Optional.of(e1));
+
+        Optional<Ejecutivo> response = ejecutivoService.updateById(id);
+
+        assertThat(response).isPresent();
+        assertThat(response.get().getNombre()).isEqualTo("Juan");
+        verify(ejecutivoRepository, times(1)).findById(id);
+    }
+
+    @Test
+    public void testUpdate_NotExists() {
+        int id = 1;
+        when(ejecutivoRepository.findById(id)).thenReturn(Optional.empty());
+
+        Optional<Ejecutivo> response = ejecutivoService.updateById(id);
+
+        assertThat(response).isEmpty();
+        verify(ejecutivoRepository, times(1)).findById(id);
     }
 }

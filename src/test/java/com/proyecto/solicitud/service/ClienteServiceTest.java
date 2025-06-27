@@ -75,10 +75,8 @@ class ClienteServiceTest
 
         when(clienteRepository.findById(id)).thenReturn(Optional.of(c1));
 
-        // Act
         Optional<Cliente> response = clienteService.updateById(id);
 
-        // Assert
         assertThat(response).isPresent();
         assertThat(response.get().getNombre()).isEqualTo("Carlos");
         verify(clienteRepository, times(1)).findById(id);
