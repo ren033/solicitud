@@ -15,6 +15,6 @@ public interface EjecutivoRepository extends JpaRepository<Ejecutivo, Integer>
     //@SuppressWarnings({ "unchecked", "null" })
     //Ejecutivo save (Ejecutivo ejecutivo);
 
-    Optional<Ejecutivo> getReferenceById(int id);
+    Optional<Ejecutivo> findById(int id);
     Optional<Ejecutivo> getReferenceByName(String nombre);
 }

@@ -23,12 +23,12 @@ public class ClienteService
         return clienteRepository.save(cliente);
     }
 
-    public Optional<Cliente> updateById(int id){
-        return clienteRepository.getReferenceById(id);
+    public Optional<Cliente> updateById(int id) {
+    return clienteRepository.findById(id);
     }
 
     public Optional<Cliente> findById(int id) {
-        return clienteRepository.getReferenceById(id);
+        return clienteRepository.findById(id);
     }
 
     public Optional<Cliente> findByName(String nombre){
@@ -36,7 +36,7 @@ public class ClienteService
     }
 
     public Optional<Cliente> deleteById(int id){
-        return clienteRepository.getReferenceById(id);
+        return clienteRepository.findById(id);
     }
 }
 

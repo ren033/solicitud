@@ -16,6 +16,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer>
     //@SuppressWarnings({"unchecked", "null"})
     //Cliente save (Cliente cliente);
 
-    Optional<Cliente> getReferenceById(int id);
+    Optional<Cliente> findById(int id);
     Optional<Cliente> getReferenceByName(String nombre);
 }

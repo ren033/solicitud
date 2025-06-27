@@ -24,11 +24,11 @@ public class EjecutivoService
     }
 
     public Optional<Ejecutivo> updateById(int id){
-        return ejecutivoRepository.getReferenceById(id);
+        return ejecutivoRepository.findById(id);
     }
 
     public Optional<Ejecutivo> findById(int id){
-        return ejecutivoRepository.getReferenceById(id);
+        return ejecutivoRepository.findById(id);
     }
 
     public Optional<Ejecutivo> findByName(String nombre){
@@ -36,7 +36,7 @@ public class EjecutivoService
     }
 
     public Optional<Ejecutivo> deleteById(int id){
-        return ejecutivoRepository.getReferenceById(id);
+        return ejecutivoRepository.findById(id);
     }
 }
 
