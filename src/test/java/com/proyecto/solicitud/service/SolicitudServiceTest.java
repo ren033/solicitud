@@ -4,6 +4,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -78,9 +79,20 @@ class SolicitudServiceTest
     }
 
     @Test
+    public void testFindById() {
+        int id = 1;
+        Solicitud sol1 = new Solicitud();
+        when(solicitudRepository.findById(id)).thenReturn(Optional.of(sol1));
+
+        Optional<Solicitud> response = solicitudService.findById(id);
+        assertTrue(response.isPresent());
+        assertEquals(sol1, response.get());
+    }
+
+    @Test
     public void testFindByClienteId() {
         int idCliente = 2;
-        Cliente c2 = new Cliente();  // Mock Cliente
+        Cliente c2 = new Cliente();
         Solicitud sol1 = new Solicitud(1, "Tipo Solicitud", "Descripcion Solicitud", true, c2);
         Solicitud sol2 = new Solicitud(2, "Tipo Solicitud", "Descripcion Solicitud", false, c2);
         List<Solicitud> solicitudes = Arrays.asList(sol1, sol2);
@@ -91,5 +103,19 @@ class SolicitudServiceTest
         assertNotNull(response);
         assertEquals(2, response.size());
         assertEquals(solicitudes, response);
+    }
+
+    @Test
+    public void testDeleteById() {
+        Cliente c2 = new Cliente();
+        int id = 2;
+        Solicitud sol2 = new Solicitud(2, "Tipo Solicitud", "Descripcion Solicitud", false, c2);
+        when(solicitudRepository.findById(id)).thenReturn(Optional.of(sol2));
+
+        Optional<Solicitud> response = solicitudService.deleteById(id);
+
+        verify(solicitudRepository).deleteById(id);
+        assertTrue(response.isPresent());
+        assertEquals(sol2, response.get());
     }
 }
