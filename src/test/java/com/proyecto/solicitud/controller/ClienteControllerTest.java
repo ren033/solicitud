@@ -5,12 +5,13 @@ import com.proyecto.solicitud.service.ClienteService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvctest(ClienteController.class)
+@WebMvcTest(ClienteController.class)
 public class ClienteControllerTest
 {
     @Autowired
