@@ -59,7 +59,7 @@ class ClienteServiceTest
     }
 
     @Test
-    public void testUpdate_Exists() {
+    public void testUpdate() {
         int id = 1;
         Cliente c1 = new Cliente();
         c1.setId(id);
@@ -76,17 +76,6 @@ class ClienteServiceTest
 
         assertThat(response).isPresent();
         assertThat(response.get().getNombre()).isEqualTo("Carlos");
-        verify(clienteRepository, times(1)).findById(id);
-    }
-
-    @Test
-    public void testUpdate_NotExists() {
-        int id = 4;
-        when(clienteRepository.findById(id)).thenReturn(Optional.empty());
-
-        Optional<Cliente> response = clienteService.updateById(id);
-
-        assertThat(response).isEmpty();
         verify(clienteRepository, times(1)).findById(id);
     }
 

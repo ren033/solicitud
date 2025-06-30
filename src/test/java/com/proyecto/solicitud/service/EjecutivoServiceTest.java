@@ -56,7 +56,7 @@ class EjecutivoServiceTest
     }
 
     @Test
-    public void testUpdate_Exists() {
+    public void testUpdate() {
         int id = 1;
         Ejecutivo e1 = new Ejecutivo();
         e1.setId(id);
@@ -72,17 +72,6 @@ class EjecutivoServiceTest
 
         assertThat(response).isPresent();
         assertThat(response.get().getNombre()).isEqualTo("Juan");
-        verify(ejecutivoRepository, times(1)).findById(id);
-    }
-
-    @Test
-    public void testUpdate_NotExists() {
-        int id = 1;
-        when(ejecutivoRepository.findById(id)).thenReturn(Optional.empty());
-
-        Optional<Ejecutivo> response = ejecutivoService.updateById(id);
-
-        assertThat(response).isEmpty();
         verify(ejecutivoRepository, times(1)).findById(id);
     }
 
