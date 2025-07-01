@@ -17,12 +17,12 @@ public class SolicitudModelAssembler implements RepresentationModelAssembler<Sol
     @Override
     public EntityModel<Solicitud> toModel(Optional<Solicitud> solicitud) {
         return EntityModel.of(solicitud,
-                linkTo(methodOn(SolicitudController.class).getAllSolicitudes()).withRel("Solicitudes"));
+                linkTo(methodOn(SolicitudController.class).getAll()).withRel("Solicitudes"));
     }
     @Override
     public EntityModel<Solicitud> toModel(Solicitud solicitud) {
         return EntityModel.of(solicitud,
-                linkTo(methodOn(SolicitudController.class).getSolicitudById(solicitud.getId())).withSelfRel());
+                linkTo(methodOn(SolicitudController.class).getById(solicitud.getId())).withSelfRel());
     }
 }
 
