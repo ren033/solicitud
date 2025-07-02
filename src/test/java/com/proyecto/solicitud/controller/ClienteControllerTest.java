@@ -3,7 +3,13 @@ package com.proyecto.solicitud.controller;
 import com.proyecto.solicitud.model.Cliente;
 import com.proyecto.solicitud.service.ClienteService;
 
+import static org.mockito.Mockito.*;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -35,5 +41,16 @@ public class ClienteControllerTest
         c1.setCorreo("carlos@email.com");
         c1.setDireccion("Calle 23");
         c1.setEstado(true);
+    }
+
+    @Test
+    public void testListClientes() throws Exception {
+        when(clienteService.listClientes()).thenReturn(List.of(cliente));
+        
+        mockMvc.perform(get("/api/cliente"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(1))
+                .andExpect(jsonPath("$[0].password").value("pass"))
+                .andExpect(jsonPath("$[0].username").value("usercarlos"));
     }
 }
