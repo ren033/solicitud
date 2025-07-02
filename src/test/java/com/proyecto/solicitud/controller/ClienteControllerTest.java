@@ -23,6 +23,7 @@ public class ClienteControllerTest
     @Autowired
     private MockMvc mockMvc;
 
+    @SuppressWarnings("removal")
     @MockBean
     private ClienteService clienteService;
 

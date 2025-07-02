@@ -15,6 +15,7 @@ public class SolicitudControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @SuppressWarnings("removal")
     @MockBean
     private SolicitudService solicitudService;
 

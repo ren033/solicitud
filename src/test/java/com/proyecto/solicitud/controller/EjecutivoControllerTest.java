@@ -16,6 +16,7 @@ public class EjecutivoControllerTest
     @Autowired
     private MockMvc mockMvc;
 
+    @SuppressWarnings("removal")
     @MockBean
     private EjecutivoService ejecutivoService;
 
