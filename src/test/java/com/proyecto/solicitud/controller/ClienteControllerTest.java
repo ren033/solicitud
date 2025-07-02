@@ -51,7 +51,18 @@ public class ClienteControllerTest
         mockMvc.perform(get("/api/cliente"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].password").value("pass"))
-                .andExpect(jsonPath("$[0].username").value("usercarlos"));
+                .andExpect(jsonPath("$[0].username").value("usercarlos"))
+                .andExpect(jsonPath("$[0].nombre").value("Carlos"));
+    }
+
+    @Test
+    public void testFindById() throws Exception {
+        when(clienteService.findById(1)).thenReturn(cliente);
+
+        mockMvc.perform(get("/api/cliente/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.password").value("pass"))
+                .andExpect(jsonPath("$.username").value("usercarlos"));
     }
 }

@@ -35,4 +35,14 @@ public class EjecutivoControllerTest
         e1.setDireccion("Dpto 08");
         e1.setEstado(true);
     }
+
+    @Test
+    public void testListEjecutivos() throws Exception {
+        when(ejecutivoService.listEjecutivos()).thenReturn(List.of(ejecutivo));
+        
+        mockMvc.perform(get("/api/ejecutivo"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(1))
+                .andExpect(jsonPath("$[0].password").value("543"))
+                .andExpect(jsonPath("$[0].nombre").value("Juan"));
 }
