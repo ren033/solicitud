@@ -1,3 +1,4 @@
+/*
 package com.proyecto.solicitud.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,3 +82,4 @@ public class SolicitudControllerV2
         return ResponseEntity.noContent().build();
     }
 }
+*/

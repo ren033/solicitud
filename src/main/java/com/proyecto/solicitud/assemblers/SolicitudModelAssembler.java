@@ -1,5 +1,5 @@
+/*
 package com.proyecto.solicitud.assemblers;
-
 
 import org.springframework.stereotype.Component;
 
@@ -29,4 +29,4 @@ public class SolicitudModelAssembler implements RepresentationModelAssembler<Sol
                 linkTo(methodOn(SolicitudControllerV2.class).getById(solicitud.getId())).withSelfRel());
     }
 }
-
+*/
