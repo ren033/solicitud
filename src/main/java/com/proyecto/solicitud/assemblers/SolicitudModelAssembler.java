@@ -19,7 +19,7 @@ import org.springframework.hateoas.EntityModel;
 @Component
 public class SolicitudModelAssembler implements RepresentationModelAssembler<Solicitud, EntityModel<Solicitud>>{
     @Override
-    public EntityModel<Solicitud> toModel(Optional<Solicitud> solicitud) {
+    public EntityModel<Optional<Solicitud>> toModel(Optional<Solicitud> solicitud) {
         return EntityModel.of(solicitud,
                 linkTo(methodOn(SolicitudControllerV2.class).getAll()).withRel("Solicitudes"));
     }

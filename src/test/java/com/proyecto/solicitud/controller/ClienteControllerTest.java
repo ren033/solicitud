@@ -8,6 +8,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ public class ClienteControllerTest
     @Autowired
     private ObjectMapper objectMapper;
 
-    private Cliente cliente;
+    private Optional<Cliente> cliente;
 
     @BeforeEach
     void setUp(){
@@ -49,7 +50,7 @@ public class ClienteControllerTest
     public void testListClientes() throws Exception {
         when(clienteService.listClientes()).thenReturn(List.of(cliente));
         
-        mockMvc.perform(get("/api/cliente"))
+        mockMvc.perform(get("/api/Cliente"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].username").value("usercarlos"))
@@ -60,7 +61,7 @@ public class ClienteControllerTest
     public void testFindById() throws Exception {
         when(clienteService.findById(1)).thenReturn(cliente);
 
-        mockMvc.perform(get("/api/cliente/1"))
+        mockMvc.perform(get("/api/Cliente/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.password").value("pass"))
