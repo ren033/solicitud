@@ -2,6 +2,8 @@ package com.proyecto.solicitud.service;
 
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,9 +27,6 @@ class SolicitudServiceTest
     @InjectMocks
     private SolicitudService solicitudService;
 
-    private Solicitud sol1;
-    private Solicitud sol2;
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -44,14 +43,37 @@ class SolicitudServiceTest
     }
 
     private Solicitud createSolicitud() {
-
         Solicitud solicitud = new Solicitud();
         solicitud.setId(1);
         solicitud.setTipoSol(TipoSol.ASISTENCIA);
-        solicitud.setDescripcion("Descripcion Solicitud");
+        solicitud.setDescripcion("Solicitud de prueba 1");
         solicitud.setEstadoSol(EstadoSol.PENDIENTE);
 
         return solicitud;
+    }
+
+    @Test
+    void testListSolicitudes() {
+        Solicitud sol1 = new Solicitud();
+        sol1.setId(1);
+        sol1.setTipoSol(TipoSol.ASISTENCIA);
+        sol1.setDescripcion("Solicitud de prueba 1");
+        sol1.setEstadoSol(EstadoSol.PENDIENTE);
+
+        Solicitud sol2 = new Solicitud();
+        sol2.setId(2);
+        sol2.setTipoSol(TipoSol.CONSULTA);
+        sol2.setDescripcion("Solicitud de prueba 2");
+        sol2.setEstadoSol(EstadoSol.AUTORIZADA);
+
+        List<Solicitud> mockSolicitudes = Arrays.asList(sol1, sol2);
+        when(solicitudRepository.findAll()).thenReturn(mockSolicitudes);
+
+        List<Solicitud> result = solicitudService.listSolicitudes();
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        verify(solicitudRepository, times(1)).findAll();
     }
 
     @Test
@@ -63,5 +85,13 @@ class SolicitudServiceTest
         Optional<Solicitud> response = solicitudService.findById(id);
         assertTrue(response.isPresent());
         assertEquals(sol1, response.get());
+    }
+
+    @Test
+    void testDeleteById() {
+        int id = 1;
+        solicitudService.deleteById(id);
+
+        verify(solicitudRepository, times(1)).deleteById(id);
     }
 }
