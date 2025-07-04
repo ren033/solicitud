@@ -1,5 +1,8 @@
 package com.proyecto.solicitud.model;
 
+import com.proyecto.solicitud.enums.EstadoSol;
+import com.proyecto.solicitud.enums.TipoSol;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,16 +18,20 @@ public class Solicitud {
     @Column(unique=true)
     private int id;
 
-    @Column(name = "Tipo Solicitud", nullable = false)
-    private String tipo;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TipoSol tipoSol;
 
     @Column(name = "Descripcion", nullable = false)
     private String descripcion;
 
-    @Column(name = "Estado", nullable = false)
-    private boolean estado;
+    @Column(nullable = false)
+    private Long idCliente;
 
-    @ManyToOne
-    @JoinColumn(name = "id_cliente", nullable = false)
-    private Cliente cliente;
+    @Column(nullable = false)
+    private String nombreCliente;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EstadoSol estadoSol;
 }
