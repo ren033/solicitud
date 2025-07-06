@@ -49,6 +49,10 @@ public class SolicitudService
         solicitudRepository.deleteById(id);
     }
 
+    public Solicitud update(Solicitud solicitud){
+        return solicitudRepository.save(solicitud);
+    }
+
 }
 
 

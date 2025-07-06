@@ -46,7 +46,7 @@ class SolicitudServiceTest
         Solicitud solicitud = new Solicitud();
         solicitud.setId(1);
         solicitud.setTipoSol(TipoSol.ASISTENCIA);
-        solicitud.setDescripcion("Solicitud de prueba 1");
+        solicitud.setDescripcion("Solicitud de prueba");
         solicitud.setEstadoSol(EstadoSol.PENDIENTE);
 
         return solicitud;
@@ -57,7 +57,7 @@ class SolicitudServiceTest
         Solicitud sol1 = new Solicitud();
         sol1.setId(1);
         sol1.setTipoSol(TipoSol.ASISTENCIA);
-        sol1.setDescripcion("Solicitud de prueba 1");
+        sol1.setDescripcion("Solicitud de prueba");
         sol1.setEstadoSol(EstadoSol.PENDIENTE);
 
         Solicitud sol2 = new Solicitud();
@@ -78,13 +78,13 @@ class SolicitudServiceTest
 
     @Test
     public void testFindById() {
-        int id = 1;
-        Solicitud sol1 = new Solicitud();
-        when(solicitudRepository.findById(id)).thenReturn(Optional.of(sol1));
+        Solicitud sol = new Solicitud();
+        sol.setId(1);
+        when(solicitudRepository.findById(1)).thenReturn(Optional.of(sol));
 
-        Optional<Solicitud> response = solicitudService.findById(id);
+        Optional<Solicitud> response = solicitudService.findById(1);
         assertTrue(response.isPresent());
-        assertEquals(sol1, response.get());
+        assertEquals(sol, response.get());
     }
 
     @Test
@@ -93,5 +93,19 @@ class SolicitudServiceTest
         solicitudService.deleteById(id);
 
         verify(solicitudRepository, times(1)).deleteById(id);
+    }
+
+    @Test
+    void testUpdateSolicitud() {
+        Solicitud sol = new Solicitud();
+        sol.setId(1);
+
+        when(solicitudRepository.save(sol)).thenReturn(sol);
+
+        Solicitud response = solicitudService.update(sol);
+
+        assertNotNull(response);
+        assertEquals(sol, response);
+        verify(solicitudRepository, times(1)).save(sol);
     }
 }
