@@ -7,21 +7,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.proyecto.solicitud.model.ClienteDTO;
 import com.proyecto.solicitud.model.Solicitud;
+import com.proyecto.solicitud.model.UsuarioDTO;
 import com.proyecto.solicitud.repository.SolicitudRepository;
 
 @Service
 public class SolicitudService
 {
     @Autowired
+    private RestTemplate restTemplate;
+    
+    @Autowired
     private SolicitudRepository solicitudRepository;
+
+    public UsuarioDTO getUsuarioById(Integer id) {
+        String url = "http://localhost:8083/api/usuario/" + id;
+        return restTemplate.getForObject(url, UsuarioDTO.class);
+    }
 
     public Solicitud create(Solicitud resupply) {
         RestTemplate restTemplate = new RestTemplate();
         
         String url = "http://localhost:8083/api/usuario/" + resupply.getIdCliente();
-        ClienteDTO cliente = restTemplate.getForObject(url, ClienteDTO.class);
+        UsuarioDTO cliente = restTemplate.getForObject(url, UsuarioDTO.class);
         
         if (cliente == null) {
             throw new RuntimeException("Cliente no encontrado con ID: " + resupply.getIdCliente());

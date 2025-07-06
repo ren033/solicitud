@@ -17,5 +17,5 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer>
     //Solicitud save (Solicitud solicitud);
 
     Optional<Solicitud> findById(int id);
-    List<Solicitud> findByClienteId(int idCliente);
+    List<Solicitud> findByClienteId(Integer idCliente);
 }

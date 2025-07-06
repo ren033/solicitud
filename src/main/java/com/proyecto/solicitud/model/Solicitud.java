@@ -26,7 +26,7 @@ public class Solicitud {
     private String descripcion;
 
     @Column(nullable = false)
-    private Long idCliente;
+    private Integer idCliente;
 
     @Column(nullable = false)
     private String nombreCliente;
